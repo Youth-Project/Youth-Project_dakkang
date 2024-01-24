@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "210889849921",
+    "project_id": "truffledemo",
+    "storage_bucket": "truffledemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210889849921:android:1e21d4e9315c69a8329ac0",
+        "android_client_info": {
+          "package_name": "com.truffledemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1J4cVsyaIyiiGeiiL6pJYY5VBAYtiD7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
