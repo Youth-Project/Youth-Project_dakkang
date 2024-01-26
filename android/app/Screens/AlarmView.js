@@ -6,6 +6,7 @@ import PushNotification from 'react-native-push-notification';
 import AlarmList from '../components/AlarmList'; 
 import InformationIcon from "../assets/icons/InformationIcon";
 import AddBTNIcon from "../assets/icons/AddBTNIcon";
+import AlarmInfoAlert from "../components/AlarmInfoAlert";
 
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -15,9 +16,14 @@ const AlarmView = () => {
   const [selectedDays, setSelectedDays] = useState([false, false, false, false, false, false, false]);
   const [modalVisible, setModalVisible] = useState(false);
   const [alarms, setAlarms] = useState([]);
+  const [infoVisible, setinfoVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const infoToggleModal = () => {
+    setinfoVisible(!infoVisible);
   };
 
   const handleDayPress = (index: number) => {
@@ -80,10 +86,12 @@ const AlarmView = () => {
       <View style={{flexDirection: 'row', gap:5, alignItems:'center'}}>
       <Text style={styles.underHeaderText}>내 알람</Text>
       <TouchableOpacity>
-        <InformationIcon marginTop={25}/>
+        <InformationIcon marginTop={25} onPress={infoToggleModal}/>
       </TouchableOpacity>
       </View>
       
+      <AlarmInfoAlert infoVisible={infoVisible} infoToggleModal={infoToggleModal}/>
+
       <TouchableOpacity
         style={styles.button}
         onPress={toggleModal}>
@@ -236,4 +244,3 @@ const styles = StyleSheet.create({
 
 
 export default AlarmView;
-

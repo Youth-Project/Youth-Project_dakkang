@@ -1,24 +1,25 @@
 import React from 'react';
-import { View, Modal, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import AlarmPopup from "../assets/logo/AlarmPopup";
+import { View, Modal, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import AMPopup from "../assets/logo/AMPopup";
 
-const AlarmInfoAlert = ({ infoVisible, infoToggleModal }) => {
+const AMInfoAlert = ({ Visible, infoModal }) => {
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={infoVisible}
+      visible={Visible}
       onRequestClose={() => {
-        infoToggleModal();
+        infoModal();
       }}
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
         <View style={{justifyContent:'center', alignItems:'center'}}>
-          <AlarmPopup/>
+          <AMPopup/>
         </View>
+
         <View style={{justifyContent:'center', alignItems:'center', height:40}}>
-          <TouchableOpacity onPress={infoToggleModal}>
+          <TouchableOpacity onPress={infoModal}>
             <Text style={styles.HeaderText}>확인</Text>
           </TouchableOpacity>
         </View>
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: 'white',
     width: 304,
-    height:310,
+    height:418,
     borderRadius: 10,
   },
 
@@ -47,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AlarmInfoAlert;
+export default AMInfoAlert;

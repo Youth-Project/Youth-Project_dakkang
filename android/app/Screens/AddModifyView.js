@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Button, View, StyleSheet, Text, Dimensions, TouchableOpacity, Modal } from "react-native";
 import InformationIcon from "../assets/icons/InformationIcon";
+import AMInfoAlert from "../components/AMInfoAlert";
 
 function AddmodifyView () {
   const [sorting, setSorting] = useState('최신순'); // 최신순이 기본값
+  const [Visible, setVisible] = useState(false);
 
   const toggleSorting = () => {
     setSorting((prevSorting) => (prevSorting === '최신순' ? '오래된 순' : '최신순'));
+  };
+
+  const infoModal = () => {
+    setVisible(!Visible);
   };
 
   return (
@@ -15,8 +21,12 @@ function AddmodifyView () {
         <Text style={styles.HeaderText}>
           문자/알림 내역
         </Text>
-        <InformationIcon marginTop={55}/>
+        <TouchableOpacity>
+          <InformationIcon marginTop={55} onPress={infoModal}/>
+        </TouchableOpacity>
       </View>
+
+      <AMInfoAlert Visible={Visible} infoModal={infoModal}/>
 
       <TouchableOpacity onPress={toggleSorting} style={styles.button}>
         <View style={styles.toggleStyle}>
@@ -28,7 +38,6 @@ function AddmodifyView () {
           </View>
         </TouchableOpacity>
 
-      
     </View>
   );
 }
