@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity , StyleSheet,AppRegistry,processColor,Dimensions} from 'react-native';
 import PieChart from 'react-native-pie-chart'
+import TruffleLogo from "../assets/logo/TruffleLogo";
 
 function DonutChart () {
   const series = [25, 21, 13, 42]
@@ -11,6 +12,7 @@ function DonutChart () {
         <Text style={Styles.Texts}>
           지출 통계
         </Text>
+        <TruffleLogo style={Styles.Logo}/>
         <View style={{alignItems:'center'}}>
         <PieChart
             widthAndHeight={200}
@@ -69,6 +71,12 @@ const Styles = StyleSheet.create({
 
   chart: {
     flex: 1
+  },
+  Logo:{
+    position: 'absolute',
+    bottom: 130,
+    left: Dimensions.get('window').width /2.6,
+    zIndex:1,
   }
 
 })

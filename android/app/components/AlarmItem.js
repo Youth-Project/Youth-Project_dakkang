@@ -12,9 +12,11 @@ const AlarmItem = ({ alarm }) => {
 
   return (
     <View style={styles.alarmItemContainer}>
-      <Text style={{fontSize:23}}>{alarm.time}</Text>
-      <Text>{alarm.days}</Text>
-      <ToggleSwitch/>
+      <View style={{width:160}}>
+        <Text style={{fontSize:30}}>{alarm.time}</Text>
+        <Text>반복, {alarm.days}</Text>
+      </View>
+    <ToggleSwitch/>
     </View>
   );
 };
@@ -22,9 +24,9 @@ const AlarmItem = ({ alarm }) => {
 const styles = StyleSheet.create({
   alarmItemContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    
+    alignItems:'center',
+    gap:140,
+    padding:10
   },
 });
 

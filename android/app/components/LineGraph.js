@@ -2,118 +2,118 @@ import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity , StyleSheet,} from 'react-native';
 import {Dimensions} from 'react-native';
 import {LineChart} from "react-native-chart-kit";
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dropdown } from 'react-native-element-dropdown';
 
-function LineGraph () {
-   const [open, setOpen] = useState(false);
-   const [value, setValue] = useState({label: '최근 1주', value: '1'});
-   const [items, setItems] = useState([
-      { label: '최근 1주', value: '1' },
-      { label: '최근 1개월', value: '2' },
-      { label: '최근 3개월', value: '3' },
-      { label: '최근 6개월', value: '4' },
-      { label: '최근 1년', value: '5' },
-   ]);
-   const [currentValue, setCurrentValue] = useState(1);
- 
-   // 드롭다운 메뉴를 선택할 때마다 값 변경
-   const onChange = (value, index) => {
+const DropdownData =[
+  { label: '최근 1주', value: '1' },
+  { label: '최근 1개월', value: '2' },
+  { label: '최근 3개월', value: '3' },
+  { label: '최근 6개월', value: '4' },
+  { label: '최근 1년', value: '5' },
+];
+
+const LineGraph = () => {
+   const [value, setValue] = useState(null);
+   const renderDropdown = () => {
      switch(value) {
-       case '1': setCurrentValue(1); break;
-       case '2': setCurrentValue(2); break;
-       case '3': setCurrentValue(3); break;
-       case '4': setCurrentValue(4); break;
-       case '5': setCurrentValue(5); break;
-       default: setCurrentValue(1);
+       case '1': 
+       return <View> 
+        <LineChart
+        data={data}
+        width={320}
+        height={220}
+        withVerticalLines={false}
+        chartConfig={chartConfig}
+        bezier
+        />
+        </View>;
+        break;
+       case '2': 
+       return <View>
+        <LineChart
+        data={data2}
+        width={320}
+        height={220}
+        withVerticalLines={false}
+        chartConfig={chartConfig}
+        bezier
+        />
+        </View>;
+        break;
+       case '3': 
+       return <View>
+       <LineChart
+       data={data3}
+       width={320}
+       height={220}
+       withVerticalLines={false}
+       chartConfig={chartConfig}
+       bezier
+       />
+       </View>;
+        break;
+       case '4': 
+       return <View>
+       <LineChart
+       data={data4}
+       width={320}
+       height={220}
+       withVerticalLines={false}
+       chartConfig={chartConfig}
+       bezier
+       />
+       </View>;
+        break;
+       case '5': 
+       return <View>
+       <LineChart
+       data={data5}
+       width={320}
+       height={220}
+       withVerticalLines={false}
+       chartConfig={chartConfig}
+       bezier
+       />
+       </View>;
+        break;
+       default: 
+       return <View>
+       <LineChart
+       data={data}
+       width={320}
+       height={220}
+       withVerticalLines={false}
+       chartConfig={chartConfig}
+       bezier
+       />
+       </View>;
      }
    }
 
   return (
-    <View style={Styles.container}>
-      <Text style={Styles.Texts}>
+    <View style={styles.container}>
+      <View style={{flexDirection: 'row',}}>
+      <Text style={styles.Texts}>
         지출 추이
       </Text>
-      
-      <View style={Styles.dropdown_container}>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          placeholder="최근 1주"
-          setOpen={setOpen}
-          dropDownDirection="BOTTOM"
-          setValue={setValue}
-          setItems={setItems}
-          height={30}
-          onChangeValue={onChange} // 값이 바뀔 때마다 실행
-          listItemContainerStyle={Styles.dropdown}
-        />
-      </View>
-    
-    {currentValue === 1 && ( //현재 값에 따라 나올 컴포넌트 변경
-      <View>
-      <LineChart
-      data={data}
-      width={320}
-      height={220}
-      withVerticalLines={false}
-      chartConfig={chartConfig}
-      bezier
+      <View style={styles.dropdown_container}>
+      <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        data={DropdownData}
+        maxHeight={200}
+        labelField="label"
+        valueField="value"
+        placeholder="최근 1주"
+        value={value}
+        onChange={(item) => {
+          setValue(item.value);
+        }}
       />
       </View>
-    )}
-
-    {currentValue === 2 && ( //현재 값에 따라 나올 컴포넌트 변경
-      <View>
-      <LineChart
-      data={data2}
-      width={320}
-      height={220}
-      withVerticalLines={false}
-      chartConfig={chartConfig}
-      bezier
-      />
       </View>
-    )}
-
-    {currentValue === 3 && ( //현재 값에 따라 나올 컴포넌트 변경
-      <View>
-      <LineChart
-      data={data3}
-      width={320}
-      height={220}
-      withVerticalLines={false}
-      chartConfig={chartConfig}
-      bezier
-      />
-      </View>
-    )}
-
-    {currentValue === 4 && ( //현재 값에 따라 나올 컴포넌트 변경
-      <View>
-      <LineChart
-      data={data4}
-      width={320}
-      height={220}
-      withVerticalLines={false}
-      chartConfig={chartConfig}
-      bezier
-      />
-      </View>
-    )}
-
-    {currentValue === 5 && ( //현재 값에 따라 나올 컴포넌트 변경
-      <View>
-      <LineChart
-      data={data5}
-      width={320}
-      height={220}
-      withVerticalLines={false}
-      chartConfig={chartConfig}
-      bezier
-      />
-      </View>
-    )}
+        {renderDropdown()}
     </View>
   );
 }
@@ -174,7 +174,7 @@ const data5 = {
 };
 //////////////////////////////////////
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width*0.9,
     height:Dimensions.get('window').height *0.35,
@@ -194,13 +194,18 @@ const Styles = StyleSheet.create({
   },
 
   dropdown_container: {
-    marginLeft: 180,
+    marginLeft: 160,
     width:130,
+    height:30,
     zIndex: 1000,
   },
-  dropdown: {
-    height:30,
-  }
+
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
 })
 
 const chartConfig = {

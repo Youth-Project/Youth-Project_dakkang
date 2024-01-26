@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button,ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button,ScrollView, Dimensions } from 'react-native';
 import AlarmItem from './AlarmItem'; // 경로에 맞게 수정
 
 const AlarmList = ({ alarms }) => {
@@ -9,7 +9,7 @@ const AlarmList = ({ alarms }) => {
   });
 
   return (
-    <View>
+    <View style={{ustifyContent: 'center', alignItems:'center',}}>
     {sortedAlarms.map((alarm, index) => (
       <View key={index} style={styles.savedInfoContainer}>
         <AlarmItem alarm={alarm} />
@@ -24,13 +24,11 @@ const AlarmList = ({ alarms }) => {
 
 const styles = StyleSheet.create({
   savedInfoContainer: {
-    backgroundColor:'white',
-    height:70,
-    borderColor:'grey',
-    borderWidth:1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems:'center',
+    backgroundColor:'#EDEDED',
+    height:75,
+    width:Dimensions.get('window').width-20,
+    marginTop:5,
+    borderRadius:10
   },
 })
 

@@ -1,9 +1,11 @@
 import React, {useState, useEffect}  from "react";
-import { Button, View, StyleSheet, Text, Dimensions, TouchableOpacity, Switch, ScrollView, Platform , Modal} from "react-native";
+import { Button, View, StyleSheet, Text, Dimensions, TouchableOpacity, Switch, ScrollView, Platform , Modal, SafeAreaView} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import DatePicker from 'react-native-date-picker';
 import PushNotification from 'react-native-push-notification';
 import AlarmList from '../components/AlarmList'; 
+import InformationIcon from "../assets/icons/InformationIcon";
+import AddBTNIcon from "../assets/icons/AddBTNIcon";
 
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -69,14 +71,25 @@ const AlarmView = () => {
   };
 
   return (
+  <SafeAreaView>
+   <ScrollView>
     <View style={styles.container}>
-      <Text style={styles.Texts}>Alarm</Text>
-      <Text style={styles.Title}>내 알람</Text>
+      
+      <Text style={styles.Title}>Alarm</Text>
+
+      <View style={{flexDirection: 'row', gap:5, alignItems:'center'}}>
+      <Text style={styles.underHeaderText}>내 알람</Text>
+      <TouchableOpacity>
+        <InformationIcon marginTop={25}/>
+      </TouchableOpacity>
+      </View>
+      
       <TouchableOpacity
         style={styles.button}
         onPress={toggleModal}>
-        <Text style={styles.buttonText}> +</Text>
+        <AddBTNIcon width={75} height={75}/>
       </TouchableOpacity>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -85,8 +98,8 @@ const AlarmView = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalHeaderText}>알람 설정</Text>
-            <Text style={styles.modalInfoText}>효율적인 지출 관리</Text>
+            <Text style={{color:'black', fontSize:15}}>알람 설정</Text>
+            <Text style={{fontSize:10, marginTop:3}}>꾸준한 기록을 위해 알람으로 알려드릴게요</Text>
 
             <DatePicker
               date={date}
@@ -95,40 +108,40 @@ const AlarmView = () => {
               title={null}
               onDateChange={setDate}
               androidVariant='iosClone'
+              marginTop={10}
             />
 
             <View style={styles.daysOfWeekContainer}>
               {daysOfWeek.map((day, index) => (
                 <TouchableOpacity
                   key={day}
-                  style={[styles.dayButton, { backgroundColor: selectedDays[index] ? 'lightblue' : 'white' }]}
+                  style={[styles.dayButton, {borderColor: selectedDays[index] ? '#FEA655' : '#EDEDED'}]}
                   onPress={() => handleDayPress(index)}
                 >
-                  <Text>{day}</Text>
+                  <Text style ={{color: selectedDays[index] ? '#FEA655' : '#DBDBDB'}}>{day}</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 30 }}>
+            <View style={{ flexDirection: 'row',gap:20, marginTop: 30, }}>
               <TouchableOpacity
-                style={[styles.buttonModal, styles.buttonClose]}
-                onPress={handleAddAlarm}>
-                <Text style={styles.textStyle}>저장하기</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[styles.buttonModal, styles.buttonClose]}
+                style={styles.selectBtn}
                 onPress={toggleModal}>
-                <Text style={styles.textStyle}>취소</Text>
+                <Text style={[styles.btnText, ,{ color:'#FE2D2D'}]}>삭제</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.selectBtn}
+                onPress={handleAddAlarm}>
+                <Text style={styles.btnText}>저장</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
-
       <AlarmList alarms={alarms} />
-     
     </View>
+  </ScrollView>
+</SafeAreaView>
   );
 };
 
@@ -138,35 +151,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height:Dimensions.get('window').height ,
     backgroundColor: '#f8f9fa',
-  },
-
-  Texts: {
-    color: '#474646',
-    //fontFamily: 'NanumGothic, sans-serif',
-    fontSize: 24,
-    alignItems:"center",
-    justifyContent:"center",
-    marginLeft: 25,
-    marginTop: 15,
-  },
-
-  button:{
-    backgroundColor: '#FEA655',
-    borderRadius: 50,
-    width:54,
-    height:54,
-    marginTop:10,
-    marginLeft:285,
-    position: 'absolute',
-    bottom: 150,
-    left: 30,
-    zIndex:1,
-
-  },
-
-  buttonText:{
-    fontSize:50,
-    color:'white'
   },
 
   Title:{
@@ -179,10 +163,21 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 
-  alarms:{
-    width: Dimensions.get('window').width - 15,
-    height:60,
-    color:'#D9D9D9'
+  underHeaderText: {
+    color: '#474646',
+    //fontFamily: 'NanumGothic, sans-serif',
+    fontSize: 24,
+    marginLeft: 25,
+    marginTop: 15,
+  },
+
+  button:{
+    marginTop:10,
+    marginLeft:285,
+    position: 'absolute',
+    bottom: 150,
+    left: 30,
+    zIndex:1
   },
 
   centeredView: {
@@ -194,7 +189,7 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: 'white',
     margin:20,
-    padding:75,
+    padding:35,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -206,43 +201,36 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  buttonModal: {
-    borderRadius: 20,
+  selectBtn: {
+    borderRadius: 2,
     padding: 10,
     elevation: 2,
+    backgroundColor: '#EDEDED',
+    width:113,
+    height:36,
+    alignItems:'center'
   },
 
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-
-  modalHeaderText: {
+  btnText: {
     color:'black',
 
-  },
-  modalInfoText: {
-    marginTop:10,
-    marginLeft:20,
-    
   },
 
   daysOfWeekContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10,
+    gap:5
   },
 
   dayButton: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#FEA655',
+    borderWidth: 2,
     borderRadius: 5,
-  },
-
-  alarmInfoView:{
-    marginTop:20,
-    height: Dimensions.get('window').width - 30,
-    backgroundColor:'blue',
+    width:24,
+    height:24,
+    backgroundColor:'white',
+    justifyContent:'center',
+    alignItems:'center'
   }
 })
 
