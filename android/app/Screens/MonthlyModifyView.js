@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, View, StyleSheet, Text, Dimensions } from "react-native";
 
-const RecipeView = ({ navigation }) => {
+const MonthlyModifyView = () => {
   return (
     <View style={Styles.container}>
       <Text style={Styles.Texts}>
-        RecipeView page
+        MonthlyModifyView page
       </Text>
     </View>
   );
@@ -27,4 +27,4 @@ const Styles = StyleSheet.create({
     marginTop: 20,
   },
 })
-export default RecipeView;
+export default MonthlyModifyView;

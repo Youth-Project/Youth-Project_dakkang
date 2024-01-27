@@ -5,9 +5,9 @@ import DonutChart from "../components/DonutChart";
 import BellIcon from "../assets/icons/BellIcon";
 import AlarmIcon from "../assets/icons/AlarmIcon";
 
-
-const Main = ({ navigation }) => {
+const Main = ({navigation}) => {
   return (
+    
     <View style={Styles.container}>
       <ScrollView>
 
@@ -27,8 +27,9 @@ const Main = ({ navigation }) => {
         </TouchableOpacity>
         </View>
       </View>
-
+      <View style={{marginTop:30}}>
       <DonutChart/>
+      </View>
       <LineGraph />
 
       </ScrollView>
@@ -36,11 +37,7 @@ const Main = ({ navigation }) => {
   );
 }
 
-/*
-     
-      <Image source ={TruffleLogo}/>   
-      
-*/
+
 const Styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
@@ -52,7 +49,7 @@ const Styles = StyleSheet.create({
     //font-family: NanumGothic,
     fontSize: 24,
     marginLeft: 22,
-    marginTop: 80,
+    marginTop: 20,
   },
   Bell:{
     size: 50,
@@ -61,8 +58,8 @@ const Styles = StyleSheet.create({
   },
   mainHeader:{
     flexDirection: 'row',
-    marginTop:80,
-    marginLeft: 190,
-    gap:15}
+    marginTop:20,
+    marginLeft: 210,
+    gap:20}
 })
 export default Main;
