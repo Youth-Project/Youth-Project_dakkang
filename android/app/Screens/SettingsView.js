@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { Button, View, StyleSheet, Text, Dimensions,TouchableOpacity, Modal } from "react-native";
 import SettingModifyIcon from "../assets/icons/SettingModifyIcon";
-import { useNavigation } from '@react-navigation/native';
 import WithdrawModal from "../assets/icons/WithdrawModal";
 import LogoutModal from "../assets/icons/LogoutModal";
 import YesBTN from "../assets/icons/YesBTN";

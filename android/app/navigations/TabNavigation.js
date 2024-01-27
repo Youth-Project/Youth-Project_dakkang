@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import "react-native-gesture-handler";
 import MainStackNavigation from "./MainStackNavigation";
+import SettingStackNavigation from "./SettingStackNavigation";
 import { NavigationContainer } from '@react-navigation/native';
 import CalendarView from "../Screens/CalendarView";
 import RecipeView from "../Screens/RecipeView";
-import SettingsView from "../Screens/SettingsView";
 import { StyleSheet } from 'react-native'; 
 
 import OnHomeIcon from "../assets/icons/onHomeIcon";
@@ -26,7 +26,7 @@ const TabNavigator = ()=>{
 
     <Tab.Navigator
     initialRouteName="Main"
-    screenOptions={{ headerShown: false, tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadius:15 }, }}
+    screenOptions={{ headerShown: false, tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadiu:15 }, }}
     >
     
     <Tab.Screen
@@ -65,7 +65,7 @@ const TabNavigator = ()=>{
     />
     <Tab.Screen
     name="SettingsView"
-    component={SettingsView}
+    component={SettingStackNavigation}
     options={({ route }) => ({
       tabBarIcon: ({ focused, size }) => {
         return (
