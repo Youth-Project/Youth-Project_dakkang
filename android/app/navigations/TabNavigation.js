@@ -10,7 +10,7 @@ import { StyleSheet } from 'react-native';
 import OnHomeIcon from "../assets/icons/onHomeIcon";
 import OnCalIcon from "../assets/icons/onCalIcon";
 import OnRecipeIcon from "../assets/icons/onRecipeIcon";
-import onSettingIcon from "../assets/icons/onSettingIcon";
+import OnSettingIcon from "../assets/icons/onSettingIcon";
 
 import OffHomeIcon from "../assets/icons/offHomeIcon";
 import OffCalIcon from "../assets/icons/offCalIcon";
@@ -26,17 +26,28 @@ const TabNavigator = ()=>{
 
     <Tab.Navigator
     initialRouteName="Main"
-    screenOptions={{ headerShown: false, tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadiu:15 }, }}
+    screenOptions={{
+      headerShown: false,
+      tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadiu:15 },
+    }}
+    tabBarOptions={{labelPosition: 'beside-icon',}}
     >
     
     <Tab.Screen
     name="Main"
     component={MainStackNavigation}
     options={({ route }) => ({
+      tabBarLabel: '', 
       tabBarIcon: ({ focused, size }) => {
-        return (
-          <OnHomeIcon/>
-        );
+        if(focused){
+          return (
+            <OnHomeIcon/>
+          );
+        }else{
+          return (
+            <OffHomeIcon/>
+          );
+        }
       },
     })}
     />
@@ -45,10 +56,17 @@ const TabNavigator = ()=>{
     name="CalendarView"
     component={CalendarView}
     options={({ route }) => ({
+      tabBarLabel: '', 
       tabBarIcon: ({ focused, size }) => {
-        return (
-          <OffCalIcon/>
-        );
+        if(focused){
+          return (
+            <OnCalIcon/>
+          );
+        }else{
+          return (
+            <OffCalIcon/>
+          );
+        }
       },
     })}/>
 
@@ -56,10 +74,17 @@ const TabNavigator = ()=>{
     name="RecipeView"
     component={RecipeView}
     options={({ route }) => ({
+      tabBarLabel: '', 
       tabBarIcon: ({ focused, size }) => {
-        return (
-          <OffRecipeIcon/>
-        );
+        if(focused){
+          return (
+            <OnRecipeIcon/>
+          );
+        }else{
+          return (
+            <OffRecipeIcon/>
+          );
+        }
       },
     })}
     />
@@ -67,10 +92,17 @@ const TabNavigator = ()=>{
     name="SettingsView"
     component={SettingStackNavigation}
     options={({ route }) => ({
+      tabBarLabel: '', 
       tabBarIcon: ({ focused, size }) => {
-        return (
-          <OffSettingIcon/>
-        );
+        if(focused){
+          return (
+            <OnSettingIcon/>
+          );
+        }else{
+          return (
+            <OffSettingIcon/>
+          );
+        }
       },
     })}
     />

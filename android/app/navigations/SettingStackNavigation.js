@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 
 const SettingStackNavigation = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SetView">
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="SetView" component={SettingsView} />
       <Stack.Screen name="MonthlyModifyView" component={MonthlyModifyView} />
     </Stack.Navigator>
