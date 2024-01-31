@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text,StyleSheet, TouchableOpacity } from 'react-native';
 import TopTri from "../assets/icons/TopTri";
 import BottomTri from "../assets/icons/BottomTri";
 import EditBTN from "../assets/icons/EditBTN";
 import Line from "../assets/icons/Line";
+import EditModal from "../components/EditModal";
 
-const SwiperComp = () => {
+const SwiperComp = ({selectedDate}) => {
+  const [EditVisible, setEditVisible] = useState(false);
+
+  const toggleEditModal = () => {
+    setEditVisible(!EditVisible);
+  };
+
   return (
+
 <View style={{alignItems:'center'}}>
   <TopTri/>
    <View style={styles.container}>
      <View style={{marginLeft:10}}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={toggleEditModal}>
        <EditBTN/>
       </TouchableOpacity>
+      <EditModal EditVisible={EditVisible} toggleEditModal={toggleEditModal} selectedDate={selectedDate}/>
       </View>
 
     <View style={{alignItems:'center',}}>

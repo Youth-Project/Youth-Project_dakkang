@@ -14,7 +14,7 @@ const WeeklyCalView = ({ route, navigation }) => {
         <Text>월간 보기</Text>
      </TouchableOpacity>
      
-     <SwiperComp/>
+     <SwiperComp selectedDate={selectedDate}/>
 
     </View>
 
