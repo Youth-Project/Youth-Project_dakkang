@@ -4,8 +4,10 @@ import TruffleLogo from "../assets/logo/TruffleLogo";
 import CancelIcon from "../assets/icons/CancelIcon";
 import ConfirmIcon from "../assets/icons/ConfirmIcon";
 import XIcon from "../assets/icons/XIcon";
+import MonthlyExceptionModal from "../assets/icons/MonthlyExceptionModal";
+import SmallYesIcon from "../assets/icons/SmallYesIcon";
 
-//  <AMInfoAlert Visible={exceptionModal} toggleException={toggleException}/>
+
 
 const MonthlyModifyView = ({navigation}) => {
   const [text, setText] = useState('');
@@ -50,11 +52,7 @@ const MonthlyModifyView = ({navigation}) => {
 
         <TouchableOpacity onPress={()=> {
           if (text === '') {
-            Alert.alert('금액 누락', '한 달 목표 금액을 입력하거나 취소 버튼을 클릭해주세요',[
-              {
-                text: '확인'
-              }
-            ]);
+            toggleException();
           } 
           else{
             navigation.goBack()}
@@ -62,7 +60,29 @@ const MonthlyModifyView = ({navigation}) => {
           {/* 백엔드로 전달하기*/}
           <ConfirmIcon/>
         </TouchableOpacity>
+        {exceptionModal && text === '' && (
+        <Modal
+        transparent={true}
+        visible={exceptionModal}
+        onRequestClose={() => {
+        toggleException();
+        }}
+        >
+        <View style={Styles.modalContainer}>
+          <View style={Styles.modalContent}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <MonthlyExceptionModal />
+            </View>
 
+            <View style={{position:'absolute', zIndex:1,justifyContent: 'center', alignItems: 'center', bottom:10, left:90}}>
+              <TouchableOpacity onPress={toggleException}>
+                <SmallYesIcon />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        </Modal>
+        )}
 
       </View>
     </View>
@@ -95,6 +115,18 @@ const Styles = StyleSheet.create({
     alignItems:'center',
     gap:40,
     marginTop:380
-  }
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    width: 243,
+    height:86,
+    borderRadius: 10,
+  },
 })
 export default MonthlyModifyView;

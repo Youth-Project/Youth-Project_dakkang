@@ -5,7 +5,8 @@ import SettingStackNavigation from "./SettingStackNavigation";
 import { NavigationContainer } from '@react-navigation/native';
 import CalendarView from "../Screens/CalendarView";
 import RecipeView from "../Screens/RecipeView";
-import { StyleSheet } from 'react-native'; 
+import { StyleSheet, Dimensions } from 'react-native'; 
+import CalStackNavigator from "./CalStackNavigation";
 
 import OnHomeIcon from "../assets/icons/onHomeIcon";
 import OnCalIcon from "../assets/icons/onCalIcon";
@@ -28,7 +29,7 @@ const TabNavigator = ()=>{
     initialRouteName="Main"
     screenOptions={{
       headerShown: false,
-      tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadiu:15 },
+      tabBarStyle: { height: 60, borderTopLeftRadius:15, borderTopRightRadius:15, },
     }}
     tabBarOptions={{labelPosition: 'beside-icon',}}
     >
@@ -54,7 +55,7 @@ const TabNavigator = ()=>{
 
     <Tab.Screen
     name="CalendarView"
-    component={CalendarView}
+    component={CalStackNavigator}
     options={({ route }) => ({
       tabBarLabel: '', 
       tabBarIcon: ({ focused, size }) => {
@@ -111,11 +112,5 @@ const TabNavigator = ()=>{
   );
 };
 
-const styles = StyleSheet.create({
-  tabBar: {
-    height: 60,
-    borderRadius:15,
-  },
-});
 
 export default TabNavigator;
